@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 标注工具 - 主控台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/loading.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="navbar">
+            <div class="navbar-brand">
+                <h1>📋 OCR 标注工具</h1>
+                <span class="navbar-subtitle">项目管理中心</span>
+            </div>
+            <div class="navbar-actions">
+                <button id="uploadFolderBtn" class="btn btn-primary">
+                    📁 上传文件夹
+                </button>
+                <button id="imageSettingsBtn" class="btn btn-nav">
+                    🖼️ 图片设置
+                </button>
+                <button id="settingsBtn" class="btn btn-nav">
+                    ⚙️ 设置
+                </button>
+                <button id="exportBtn" class="btn btn-success">
+                    💾 导出数据
+                </button>
+            </div>
+        </header>
+
+        <!-- 统计概览 -->
+        <section class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-icon">📂</div>
+                <div class="stat-content">
+                    <div class="stat-number" id="totalFolders">0</div>
+                    <div class="stat-label">总文件夹</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🖼️</div>
+                <div class="stat-content">
+                    <div class="stat-number" id="totalImages">0</div>
+                    <div class="stat-label">总图片数</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-content">
+                    <div class="stat-number" id="processedImages">0</div>
+                    <div class="stat-label">已识别</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <div class="stat-number" id="calibratedImages">0</div>
+                    <div class="stat-label">已校准</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主工作区：三栏布局 -->
+        <main class="dashboard-workspace">
+            <!-- 第一栏：未识别 -->
+            <section class="column column-unprocessed">
+                <header class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">📥</span>
+                        <h3>未识别</h3>
+                        <span class="folder-count" id="unprocessedCount">0</span>
+                    </div>
+                    <button class="btn btn-small column-action" id="batchProcessBtn" disabled>
+                        🚀 批量识别
+                    </button>
+                </header>
+                <div class="column-content" id="unprocessedList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📁</div>
+                        <p>暂无未识别的文件夹</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('uploadFolderBtn').click()">
+                            上传第一个文件夹
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二栏：已识别 -->
+            <section class="column column-processed">
+                <header class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">✅</span>
+                        <h3>已识别</h3>
+                        <span class="folder-count" id="processedCount">0</span>
+                    </div>
+                    <button class="btn btn-small column-action" id="batchCalibrateBtn" disabled>
+                        🎯 批量校准
+                    </button>
+                </header>
+                <div class="column-content" id="processedList">
+                    <div class="empty-state">
+                        <div class="empty-icon">✅</div>
+                        <p>暂无已识别的文件夹</p>
+                        <p class="empty-hint">完成OCR识别后会出现在这里</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三栏：已校准 -->
+            <section class="column column-calibrated">
+                <header class="column-header">
+                    <div class="column-title">
+                        <span class="column-icon">🎯</span>
+                        <h3>已校准</h3>
+                        <span class="folder-count" id="calibratedCount">0</span>
+                    </div>
+                    <button class="btn btn-small column-action" id="exportCalibratedBtn" disabled>
+                        📤 导出结果
+                    </button>
+                </header>
+                <div class="column-content" id="calibratedList">
+                    <div class="empty-state">
+                        <div class="empty-icon">🎯</div>
+                        <p>暂无已校准的文件夹</p>
+                        <p class="empty-hint">完成人工校准后会出现在这里</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span id="statusText">系统就绪</span>
+            </div>
+            <div class="status-right">
+                <span id="lastUpdateTime"></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript 模块 -->
+    <!-- 性能优化组件 -->
+    <script src="js/virtual-scroll.js"></script>
+    <script src="js/image-loader.js"></script>
+    <script src="js/storage-optimized.js"></script>
+    <script src="js/batch-processor.js"></script>
+    <script src="js/progress-manager.js"></script>
+    
+    <!-- 核心功能 -->
+    <script src="js/modal.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/imageLoader.js"></script>
+    <script src="js/loadingIndicator.js"></script>
+    <script src="js/imageSettings.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

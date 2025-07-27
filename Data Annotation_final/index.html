@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 标注工具 - 重定向中...</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .redirect-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--background-color) 0%, #E8E9ED 100%);
+            text-align: center;
+            gap: var(--spacing-lg);
+        }
+        
+        .redirect-icon {
+            font-size: 4rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .redirect-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .redirect-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .redirect-progress {
+            width: 300px;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .redirect-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+            width: 0%;
+            animation: fillProgress 2s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        .redirect-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .redirect-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <div class="redirect-icon">🚀</div>
+        <h1 class="redirect-title">OCR 标注工具已升级！</h1>
+        <p class="redirect-message">正在跳转到全新的主控台界面...</p>
+        
+        <div class="redirect-progress">
+            <div class="redirect-fill"></div>
+        </div>
+        
+        <p class="redirect-message">
+            如果页面没有自动跳转，请 
+            <a href="dashboard.html" class="redirect-link">点击这里</a>
+        </p>
+    </div>
+
+    <script>
+        // 2秒后自动跳转到主控台
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 2000);
+        
+        // 立即跳转（不等待动画）
+        // window.location.href = 'dashboard.html';
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 标注校准工具</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calibration.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="navbar">
+            <div class="navbar-left">
+                <button id="backBtn" class="btn btn-nav">← 返回主控台</button>
+                <div class="folder-info">
+                    <h2 id="folderName">加载中...</h2>
+                    <span id="imageProgress">0/0</span>
+                </div>
+            </div>
+            
+            <div class="navbar-center">
+                <div class="image-nav">
+                    <button id="prevBtn" class="btn btn-nav" disabled>⬅️ 上一张</button>
+                    <span id="imageName">请稍候...</span>
+                    <button id="nextBtn" class="btn btn-nav" disabled>➡️ 下一张</button>
+                </div>
+            </div>
+            
+            <div class="navbar-right">
+                <button id="completeBtn" class="btn btn-success" disabled>✅ 完成校准</button>
+            </div>
+        </header>
+
+        <!-- 主工作区 -->
+        <main class="workspace">
+            <!-- 左侧：图片和标注区 -->
+            <section class="image-section">
+                <div class="image-container">
+                    <img id="currentImage" src="" alt="当前图片" style="display: none;">
+                    <canvas id="annotationCanvas"></canvas>
+                </div>
+            </section>
+
+            <!-- 右侧：文本编辑区 -->
+            <section class="text-section">
+                <div class="text-header">
+                    <h3>识别文本编辑</h3>
+                    <div class="text-controls">
+                        <button id="addTextBtn" class="btn btn-primary">➕ 添加</button>
+                        <button id="clearAllBtn" class="btn btn-danger">🗑️ 清空</button>
+                    </div>
+                </div>
+                
+                <div class="text-list-container">
+                    <div id="textList" class="text-list">
+                        <div class="loading">
+                            <div class="loading-spinner">⏳</div>
+                            <p>正在加载...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 统计信息 -->
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="label">文本框:</span>
+                        <span id="textCount" class="value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">字符数:</span>
+                        <span id="charCount" class="value">0</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部状态栏 -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span id="statusText">正在初始化...</span>
+            </div>
+            <div class="status-right">
+                <span id="lastSave"></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript 模块 -->
+    <!-- 性能优化组件 -->
+    <script src="js/image-loader.js"></script>
+    <script src="js/progress-manager.js"></script>
+    
+    <!-- 核心功能 -->
+    <script src="js/modal.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/calibration.js"></script>
+</body>
+</html>
